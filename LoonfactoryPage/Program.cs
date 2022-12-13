@@ -11,11 +11,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-builder.Services.AddDbContext<LoonfactoryDbContext>(options =>
+builder.Services.AddDbContext<LoonfactoryWebContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<LoonfactoryDbContext>();
+    .AddEntityFrameworkStores<LoonfactoryWebContext>();
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
